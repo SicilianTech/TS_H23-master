@@ -1,0 +1,77 @@
+=> TEST Création ou lecture de nouveaux payables
+
+=> TEST Trouver un payable et afficher l'information sur ce payable
+EmployeSalarie: Marie Renaud
+numéro d'assurance sociale: 246864246
+salaire hebdomadaire: 5 000,00
+
+=> TEST Création d'un payable avec un ID existant
+Payable 10 est déjà présent dans la base de données.
+
+=> TEST Enlever un payable
+
+=> TEST Enlever un payable non existant (catch exception)
+Payable 10 n'est pas dans la BD.
+
+=> TEST Remettre un payable
+
+=> TEST Allonger deux fois le délai de paiement d'un payable et afficher les nouvelles informations
+EmployeHoraire: Kevin Bouchard
+numéro d'assurance sociale: 123321123
+taux horaire: 25,50; heures travaillées: 35,00
+Échéance en jours: 50
+
+=> TEST Raccourcir le délai de paiement d'un payable et afficher les nouvelles informations
+EmployeHoraire: Kevin Bouchard
+numéro d'assurance sociale: 123321123
+taux horaire: 25,50; heures travaillées: 35,00
+Échéance en jours: 25
+
+=> Raccourcir le délai de paiement d'un payable non existant (catch exception)
+Payable 9 n'est pas dans la BD.
+
+=> TEST Trop raccourcir le délai de paiement d'un payable (catch exception)
+Enlever 100 d'échéance nous amènera à une échéance négative.
+
+=> TEST Récupérer le tableau de payables
+ID [ 10] Catégorie [           EmployeSalarie] Mémo [ Bonne employée] Échéance [  0] Paiement [   5000,00] Nom complet [        Marie Renaud] NAS [246864246] Salaire [5000.0]
+EmployeSalarie: Marie Renaud
+numéro d'assurance sociale: 246864246
+salaire hebdomadaire: 5 000,00
+paiement dû: 5 000,00
+
+ID [ 14] Catégorie [                  Facture] Mémo [   Gros vendeur] Échéance [  0] Paiement [    782,00] Code [34X53] Description [Tournevis] Quantité [34] Prix [23.0]
+Facture:
+numéro de la pièce: 34X53 (Tournevis)
+quantité: 34
+prix par item: 23,00
+paiement dû: 782,00
+
+ID [ 13] Catégorie [EmployeHoraireAvecCommission] Mémo [   Du potentiel] Échéance [  0] Paiement [   6487,50] Nom complet [          Alan Walsh] NAS [973813265] Salaire [15.0] Heures [32.5] Commission [0.15] Ventes [40000.0]
+EmployeHoraireAvecCommission: Alan Walsh
+numéro d'assurance sociale: 973813265
+taux horaire: 15,00; heures travaillées: 32,50; taux de commission: 0,15
+paiement dû: 6 487,50
+
+ID [ 12] Catégorie [EmployeSalarieAvecCommission] Mémo [    Peu motivée] Échéance [  0] Paiement [   5500,00] Nom complet [    Aline Brullemans] NAS [123327832] Salaire [4000.0] Commission [0.1] Ventes [15000.0]
+EmployeSalarieAvecCommission: Aline Brullemans
+numéro d'assurance sociale: 123327832
+salaire hebdomadaire: 4 000,00; taux de commission: 0,10
+paiement dû: 5 500,00
+
+ID [ 11] Catégorie [           EmployeHoraire] Mémo [         Assidu] Échéance [ 25] Paiement [    892,50] Nom complet [      Kevin Bouchard] NAS [123321123] Salaire [25.5] Heures [35.0]
+EmployeHoraire: Kevin Bouchard
+numéro d'assurance sociale: 123321123
+taux horaire: 25,50; heures travaillées: 35,00
+paiement dû: 892,50
+
+
+=> TEST Écrire le tableau de payables dans un fichier pour relecture
+
+=> TEST Ce qu'il faut payer à tous les payables, incluant un bonus de 10% sur le salaire hebdomadaire des employés salariées à commission
+ID 10. À payer: 5000.0
+ID 14. À payer: 782.0
+ID 13. À payer: 6487.5
+ID 12. Salaire de base = 4000.0, nouveau salaire de base avec une augmentation de 10%: 4400.0. À payer: 5900.0
+ID 11. À payer: 892.5
+

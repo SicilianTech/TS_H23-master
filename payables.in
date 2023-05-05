@@ -1,0 +1,5 @@
+ID [ 10] Nom complet [        Marie Renaud] NAS [246864246] Salaire [5000,00] Mémo [ Bonne employée] Catégorie [      EmployeSalarie]
+ID [ 14] Numéro [          34X53] Description [                Tournevis] Nombre [ 34] Prix [     23,00] Mémo [   Gros vendeur] Catégorie [             Facture]
+ID [ 13] Nom complet [          Alan Walsh] NAS [973813265] Taux Horaire [15,00] Heures travaillées [32,50] Taux commission [0,15] Ventes [  40000,00] Mémo [   Du potentiel] Catégorie [EmployeHoraireAvecCommission]
+ID [ 12] Nom complet [    Aline Brullemans] NAS [123327832] Salaire [4000,00] Taux Commission [0,10] Ventes [  15000,00] Mémo [    Peu motivée] Catégorie [EmployeSalarieAvecCommission]
+ID [ 11] Nom complet [      Kevin Bouchard] NAS [123321123] Taux Horaire [25,50] Heures travaillées [35,00] Mémo [         Assidu] Catégorie [      EmployeHoraire]
