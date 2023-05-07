@@ -59,7 +59,7 @@ public class GUIPayableDialogue extends JDialog {
             contentPane.add(champDescriptionPiece);
 
             champQuantite = new JTextField("" + ((Facture) payable).getQuantite());
-            champQuantite .setEditable(editable);
+            champQuantite.setEditable(editable);
             contentPane.add(new JLabel("Quantité"));
             contentPane.add(champQuantite );
 

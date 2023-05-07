@@ -63,4 +63,6 @@ public abstract class Payable {
 	}
 
 	public abstract String toStringSauvegarde();
+
 }
+

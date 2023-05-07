@@ -25,7 +25,7 @@ public class EmployeSalarieAvecCommission extends EmployeSalarie implements Comm
         return venteBrutes;
     }
 
-    public void setVenteBrutes(double venteBrutes) {
+    public void setVentesBrutes(double venteBrutes) {
         this.venteBrutes = venteBrutes;
     }
 
@@ -54,7 +54,7 @@ public class EmployeSalarieAvecCommission extends EmployeSalarie implements Comm
     public String toStringSauvegarde() {
         String info = String.format("ID [%3d] Nom complet [%20s] NAS [%9s] Salaire [%6.2f] Mémo [%15s] Catégorie [%20s]",
                 this.getID(), this.getNomComplet(), this.getNumeroAssuranceSociale(),
-                this.getSalaireHebdomadaire(), this.getMemo(), this.getCategorieString());
+                this.getSalaireHebdomadaire(), getMontantCommission(venteBrutes),this.getMemo(), this.getCategorieString());
         return info;
     }
 }

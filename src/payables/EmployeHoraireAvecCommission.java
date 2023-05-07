@@ -8,18 +8,33 @@ public class EmployeHoraireAvecCommission extends EmployeHoraire implements Comm
                                         double tauxHoraire, double heuresTravaillees,
                                         double tauxCommission, double ventesBrutes, String memo) {
         super(id, nom, nas, tauxHoraire, heuresTravaillees, memo);
-        setTauxCommission(tauxCommission);
+        this.tauxCommission = tauxCommission;
         categorie = Categorie.EmployeHoraireAvecCommission;
-        setVentesBrutes(ventesBrutes);
+       this.ventesBrutes = ventesBrutes;
     }
 
     public double getTauxCommission() {
         return tauxCommission;
     }
+
+    public void setTauxCommission(double tauxCommission) {
+        this.tauxCommission = tauxCommission;
+    }
+
+    public void setVentesBrutes(double ventesBrutes) {
+        this.ventesBrutes = ventesBrutes;
+    }
+
     //
     // TODO 03-- Ajoutez tout le code nécessaire pour coder la classe au complet coder la classe au completen vous basant sur le diagramme UML
     //         ainsi que la gestion des erreurs possibles si nécessaire
     //
+    public double getVentesBrutes() {
+        return ventesBrutes;
+    }
+    public double getMontantCommission(double venteTotale) {
+        return venteTotale * tauxCommission;
+    }
     @Override
     public String toString() {
         return String.format("%s; %s: %,.2f",

@@ -6,6 +6,7 @@ public class EmployeHoraire extends Employe {
 	public final double HEURE_TEMPS_COMPLET = 40;
 	public final double RATION_TEMPS_SUPP = 1.5;
 
+
 	public EmployeHoraire(int id, String nom, String nas,
 						  double tauxHoraire, double heuresTravaillees, String memo) {
 		super(id, nom, nas, memo);
@@ -39,11 +40,16 @@ public class EmployeHoraire extends Employe {
 	// TODO 03-- Ajoutez tout le code nécessaire pour coder la classe au complet coder la classe au completen vous basant sur le diagramme UML
 	//         ainsi que la gestion des erreurs possibles si nécessaire
 	public double getMontantPaiement(){
-		return heuresTravaillees *  tauxHoraire;
+		if(heuresTravaillees > HEURE_TEMPS_COMPLET){
+			return heuresTravaillees * tauxHoraire + ((heuresTravaillees - HEURE_TEMPS_COMPLET) * tauxHoraire * RATION_TEMPS_SUPP);
+
+		}
+		else
+			return heuresTravaillees * tauxHoraire;
 	}
 	public String toString() {
 		return String.format("%s: %s%n%s: %,.2f",
-				getCategorieString(), super.toString(), "salaire horaire", tauxHoraire);
+				getCategorieString(), super.toString(), "salaire horaire", this.tauxHoraire);
 	}
 
 	public String toStringAffichage() {

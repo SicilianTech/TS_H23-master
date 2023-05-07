@@ -225,7 +225,7 @@ public class GUIGestionnaireInventaire extends JFrame
         System.out.println("\n=> TEST Récupérer le tableau de payables après un événement");
         Payable[] payables = gestionnaireInventaire.getTableauPayables();
         for (Payable payable : payables)
-                System.out.println(payable);
+            System.out.println(payable);
     }
 
     private void majModeleListe() {

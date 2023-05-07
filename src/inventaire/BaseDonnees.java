@@ -17,6 +17,7 @@ public class BaseDonnees {
         nombrePayables = 0;
     }
 
+
     public void inserer(Payable p) throws ExceptionPayableExisteDeja {
         if (trouverParID(p.getID()) != null) {
             throw new ExceptionPayableExisteDeja(p.getID());

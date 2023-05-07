@@ -39,7 +39,7 @@ public class EmployeSalarie extends Employe {
 
 	public String toStringSauvegarde() {
 		String info = String.format("ID [%3d] Nom complet [%20s] NAS [%9s] Salaire [%6.2f] Mémo [%15s] Catégorie [%20s]",
-				this.getID(), this.getNomComplet(), this.getNumeroAssuranceSociale(),
+				this.getID(), this.getNomComplet(), this.getNumeroAssuranceSociale(), this.getID(),
 				this.getSalaireHebdomadaire(), this.getMemo(), this.getCategorieString());
 		return info;
 	}
