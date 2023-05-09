@@ -93,6 +93,17 @@ public class GUIGestionnaireInventaire extends JFrame
             //         L'information dans la liste des payables doit être automatiquement mise à jour.
             // Indices: Pour la mise à jour automatique, le plus simple est d'effacer et
             //            reconstruire modeleListePayables.
+            int index = listePayables.getSelectedIndex();
+            if(index == -1){
+                JOptionPane.showMessageDialog(this, "Veuille selectionner un payable à modifier");
+                return;
+            }
+            Payable payable = gestionnaireInventaire.getTableauPayables()[index];
+            payable.setEcheanceJours(payable.getEcheanceJours() + 1);
+            modeleListePayables = new DefaultListModel<>();
+            for (Payable p : gestionnaireInventaire.getTableauPayables())
+                modeleListePayables.addElement(p.toStringAffichage());
+            listePayables.setModel(modeleListePayables);
         });
 
         return button;
@@ -107,6 +118,21 @@ public class GUIGestionnaireInventaire extends JFrame
             // Indices: Pour la mise à jour automatique, le plus simple est d'effacer et
             //            reconstruire modeleListePayables.
             //
+            int index = listePayables.getSelectedIndex();
+            System.out.println(event);
+            if(index == -1){
+                JOptionPane.showMessageDialog(this, "Veuille selectionner un payable à modifier");
+                return;
+            }
+            Payable payable = gestionnaireInventaire.getTableauPayables()[index];
+            int nouvelleEcheance = payable.getEcheanceJours() - 1;
+            if (nouvelleEcheance < 0) {
+       //         throw new ExceptionEcheanceInsuffisante(payable.getEcheanceJours(), "La nouvelle échéance ne peut pas être inférieure à zéro.");
+            }
+            payable.setEcheanceJours(nouvelleEcheance);
+            for (Payable p : gestionnaireInventaire.getTableauPayables())
+                modeleListePayables.addElement(p.toStringAffichage());
+            listePayables.setModel(modeleListePayables);
         });
 
         return button;
