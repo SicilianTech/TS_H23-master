@@ -48,16 +48,18 @@ public class EmployeHoraire extends Employe {
 			return heuresTravaillees * tauxHoraire;
 	}
 	public String toString() {
-		return String.format("%s: %s%n%s: %,.2f",
-				getCategorieString(), super.toString(), "salaire horaire", this.tauxHoraire);
+		return String.format("%s: %s%n%s: %,.2f %s: %,.2f",
+				getCategorieString(), super.toString(),
+				"salaire horaire", this.tauxHoraire,
+				"heures travaillées", this.heuresTravaillees);
 	}
 
 	public String toStringAffichage() {
 		String info = super.toStringAffichage();
-		info += " Salaire [" + this.getMontantPaiement()  + "]";
+		info += " Salaire [" + this.getMontantPaiement()  + "] + heures travaillées ["+ String.format("%,.2f", this.getHeuresTravaillees()) + "]";
 		return info;
 	}
-	//
+
 	public String toStringSauvegarde() {
 		String info = String.format("ID [%3d] Nom complet [%20s] NAS [%9s] Taux Horaire [%4.2f] Heures travaillées [%4.2f] Mémo [%15s] Catégorie [%20s]",
 				this.getID(), this.getNomComplet(), this.getNumeroAssuranceSociale(),

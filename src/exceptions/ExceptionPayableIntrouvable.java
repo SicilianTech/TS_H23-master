@@ -5,6 +5,6 @@ package exceptions;
 //
 public class ExceptionPayableIntrouvable extends Exception {
     public ExceptionPayableIntrouvable(int ID) {
-        super("Payable introuvable avec l'ID " + ID);
+        super("Payable " + ID + " n'est pas dans la base de données");
     }
 }

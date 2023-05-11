@@ -10,72 +10,92 @@ import inventaire.GestionnaireInventaire;
 import gui.GUIGestionnaireInventaire;
 
 public class Main {
-    // TODO 15-- Codez la fonction lireInventaire ici
     public static void lireInventaire(String nomFichier, GestionnaireInventaire gestionnaireInventaire) throws FileNotFoundException {
-        File fichier = new File("payable.in");
+        File fichier = new File(nomFichier);
         Scanner lecteurFichier = new Scanner(fichier);
         while (lecteurFichier.hasNextLine()) {
             while (lecteurFichier.hasNextLine()) {
                 String ligne = lecteurFichier.nextLine();
-                String[] champs = ligne.split("] ");
-                int id = Integer.parseInt(champs[0].substring(4)); // enlever les premiers caractères "ID ["
-                String typePayable = champs[1].substring(0, champs[1].indexOf("[")).trim();
-                String[] attributs = champs[1].substring(champs[1].indexOf("[") + 1, champs[1].length() - 1).split(", ");
-                Payable payable = null;
 
-                switch (typePayable) {
-                    case "Facture":
-                        int idFacture = Integer.parseInt(attributs[0].substring(7));
-                        String numero = attributs[1].substring(16);
-                        String description = attributs[2].substring(8);
-                        int nombre = Integer.parseInt(attributs[3]);
-                        double prix = Double.parseDouble(attributs[4].substring(7));
-                        String memo = attributs[5].substring(6);
-                        payable = new Facture(idFacture, numero, description, nombre, prix, memo);
-                        break;
-                    case "EmployeSalarie":
-                        String nomEmploye = attributs[0].substring(8);
-                        String NAS = attributs[1].substring(5);
-                        double salaire = Double.parseDouble(attributs[2].substring(8));
-                        String memoEmploye = attributs[3].substring(6);
-                        payable = new EmployeSalarie(id, nomEmploye, NAS, salaire, memoEmploye);
-                        break;
-                    case "EmployeSalarieAvecCommission":
-                        String nomEmployeComm = attributs[0].substring(8);
-                        String NASComm = attributs[1].substring(5);
-                        double salaireComm = Double.parseDouble(attributs[2].substring(8));
-                        double tauxCommissionComm = Double.parseDouble(attributs[3].substring(16));
-                        double ventesComm = Double.parseDouble(attributs[4].substring(9));
-                        String memoEmployeComm = attributs[5].substring(6);
-                        payable = new EmployeSalarieAvecCommission(id, nomEmployeComm, NASComm, salaireComm, tauxCommissionComm, ventesComm, memoEmployeComm);
-                        break;
-                    case "EmployeHoraire":
-                        String nomEmployeHoraire = attributs[0].substring(8);
-                        String NASHoraire = attributs[1].substring(5);
-                        double tauxHoraireHoraire = Double.parseDouble(attributs[2].substring(14));
-                        double heuresTravailleesHoraire = Double.parseDouble(attributs[3].substring(20));
-                        String memoEmployeHoraire = attributs[4].substring(6);
-                        payable = new EmployeHoraire(id, nomEmployeHoraire, NASHoraire, tauxHoraireHoraire, heuresTravailleesHoraire, memoEmployeHoraire);
-                        break;
-                    case "EmployeHoraireAvecCommission":
-                        String nomEmployeCommHoraire = attributs[0].substring(8);
-                        String NASHoraireComm = attributs[1].substring(5);
-                        double tauxHoraireHoraireComm = Double.parseDouble(attributs[2].substring(14));
-                        double heuresTravailleesHoraireComm = Double.parseDouble(attributs[3].substring(20));
-                        double tauxCommissionHoraireComm = Double.parseDouble(attributs[4].substring(16));
-                        double ventesHoraireComm = Double.parseDouble(attributs[5].substring(9));
-                        String memoEmployeCommHoraire = attributs[6].substring(6);
-                        payable = new EmployeHoraireAvecCommission(id, nomEmployeCommHoraire, NASHoraireComm, tauxHoraireHoraireComm, heuresTravailleesHoraireComm, tauxCommissionHoraireComm, ventesHoraireComm, memoEmployeCommHoraire);
-                        break;
+                String[] champs = ligne.split("\\[|\\]");
+                String categorie = champs[champs.length - 1].trim();
+                System.out.println(categorie);
+                int id = Integer.parseInt(champs[1].trim());
+                String memo = champs[champs.length - 3].trim();
+                if(categorie.startsWith("Employe")) {
+                    String nomComplet = champs[3].trim();
+                    String nas = champs[5].trim();
+                    if(categorie.equals("EmployeSalarie")) {
+                        double salaire = Double.parseDouble(champs[7].replace(",", ".").trim());
+
+                        try {
+                            gestionnaireInventaire.ajouterPayable(new EmployeSalarie(id, nomComplet, nas, salaire, memo));
+                        } catch (ExceptionPayableExisteDeja e) {
+                            // handle the exception here
+                            System.out.println("Erreur: " + e.getMessage());
+                        }
+                    }
+                        if(categorie.equals("EmployeSalarieAvecCommission")){
+                            double salaire = Double.parseDouble(champs[7].replace(",", ".").trim());
+                            double tauxCommission = Double.parseDouble(champs[9].replace(",", ".").trim());
+                            double ventesBrutes = Double.parseDouble(champs[11].replace(",", ".").trim());
+                            try {
+                                gestionnaireInventaire.ajouterPayable(new EmployeSalarieAvecCommission(id, nomComplet, nas, salaire, tauxCommission,ventesBrutes, memo));
+                            } catch (ExceptionPayableExisteDeja e) {
+
+                                System.out.println("Erreur: " + e.getMessage());
+                            }
+
+                        }
+                    if(categorie.equals("EmployeHoraire")){
+                        double tauxHoraire = Double.parseDouble(champs[7].replace(",", ".").trim());
+                        double heureTravaillees = Double.parseDouble(champs[9].replace(",", ".").trim());
+                        try {
+                            gestionnaireInventaire.ajouterPayable(new EmployeHoraire(id, nomComplet, nas, tauxHoraire, heureTravaillees, memo));
+                        } catch (ExceptionPayableExisteDeja e) {
+
+                            System.out.println("Erreur: " + e.getMessage());
+                        }
+                    }
+                        if (categorie.equals("EmployeHoraireAvecCommission")){
+                            double tauxHoraire = Double.parseDouble(champs[7].replace(",", ".").trim());
+                            double heureTravaillees = Double.parseDouble(champs[9].replace(",", ".").trim());
+                            double tauxCommission = Double.parseDouble(champs[11].replace(",", ".").trim());
+                            double ventesBrutes = Double.parseDouble(champs[13].replace(",", ".").trim());
+                            try {
+                                gestionnaireInventaire.ajouterPayable(new EmployeHoraireAvecCommission(id, nomComplet, nas, tauxHoraire, heureTravaillees,tauxCommission,ventesBrutes, memo));
+                            } catch (ExceptionPayableExisteDeja e) {
+
+                                System.out.println("Erreur: " + e.getMessage());
+                            }
+
+                        }
                 }
+                else if(categorie.equals("Facture")){
+                    String numero = champs[3].trim();
+                    String description = champs[5].trim();
+                    int nombre = Integer.parseInt(champs[7].trim());
+                    double prix = Double.parseDouble(champs[9].replace(",", ".").trim());
+                    try {
+                        gestionnaireInventaire.ajouterPayable(new Facture(id,numero,description,nombre,prix, memo));
+                    } catch (ExceptionPayableExisteDeja e) {
+
+                        System.out.println("Erreur: " + e.getMessage());
+                    }
+                }
+
+
+
+
+
             }
         }
     }
-    // TODO 16-- Codez la fonction ecrireInventaire ici
-    public static void ecrireInventaire(String nomFichier, Payable[] payables) {
+
+    public static void ecrireInventaire(String monFichier, Payable[] payables) {
         try {
-            FileWriter fichier = new FileWriter(nomFichier); // utilisation de la variable nomFichier
-            PrintWriter ecritureFichier = new PrintWriter("payables.out");
+            FileWriter fichier = new FileWriter(monFichier);
+            PrintWriter ecritureFichier = new PrintWriter(fichier);
 
             for  (Payable payable : payables) {
                 if (payable instanceof EmployeSalarie) {
@@ -122,7 +142,7 @@ public class Main {
         System.out.println("\n=> TEST Création ou lecture de nouveaux payables");
         // Le bout de code qui suit vous permet de tester si votre fonction lireInventaire fonctionne correctement
         // Le contenu de src/payables.in est le même que celui généré par le code du else
-        final boolean LECTURE = false;
+        final boolean LECTURE = true;
         if (LECTURE)
            lireInventaire("payables.in", gestionnaireInventaire);
         else {

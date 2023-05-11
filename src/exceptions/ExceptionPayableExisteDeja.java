@@ -5,6 +5,6 @@ package exceptions;
 //
 public class ExceptionPayableExisteDeja extends Exception {
     public ExceptionPayableExisteDeja(int id) {
-        super("Le numéro ID " + id + " est déjà utilisé.");
+        super("Payable " + id + " est déja présent dans la base de données");
     }
 }

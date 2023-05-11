@@ -45,7 +45,7 @@ public class GestionnaireInventaire {
         }
         else{
             if (payable.getEcheanceJours() - e < 0){
-                throw new ExceptionEcheanceInsuffisante(payable.getEcheanceJours() - e);
+                throw new ExceptionEcheanceInsuffisante(e);
             }
             else{
                 payable.diminuerEcheance(e);

@@ -57,8 +57,8 @@ public class Facture extends Payable {
 	}
 
 	public String toStringAffichage() {
-		return String.format("Facture #%s\nDescription : %s\nQuantité : %d\nPrix par item : %.2f\nMontant total : %.2f",
-				numeroPiece, descriptionPiece, quantite, prixParItem, getMontantPaiement());
+		return String.format("Facture: \nnuméro de la pièce: %s\nquantité : %d\nprix par item : %.2f\npayement dû : %.2f",
+				numeroPiece + " " + descriptionPiece, quantite, prixParItem, getMontantPaiement());
 	}
 
 	public String toStringSauvegarde() {
