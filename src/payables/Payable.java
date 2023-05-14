@@ -57,7 +57,7 @@ public abstract class Payable {
 	}
 
 	public String toStringAffichage() {
-		String info = String.format("ID [%3d] Catégorie [%25s] Mémo [%15s] Échéance [%3d] Paiement [%10.2f]",
+		String info = String.format("ID [%3d] Catégorie [%30s] Mémo [%15s] Échéance [%3d] Paiement [%7.2f]",
 				this.ID, this.getCategorieString(), this.getMemo(), this.getEcheanceJours(), this.getMontantPaiement());
 		return info;
 	}

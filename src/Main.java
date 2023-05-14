@@ -19,7 +19,6 @@ public class Main {
 
                 String[] champs = ligne.split("\\[|\\]");
                 String categorie = champs[champs.length - 1].trim();
-                System.out.println(categorie);
                 int id = Integer.parseInt(champs[1].trim());
                 String memo = champs[champs.length - 3].trim();
                 if(categorie.startsWith("Employe")) {
@@ -31,7 +30,6 @@ public class Main {
                         try {
                             gestionnaireInventaire.ajouterPayable(new EmployeSalarie(id, nomComplet, nas, salaire, memo));
                         } catch (ExceptionPayableExisteDeja e) {
-                            // handle the exception here
                             System.out.println("Erreur: " + e.getMessage());
                         }
                     }
@@ -71,7 +69,7 @@ public class Main {
 
                         }
                 }
-                else if(categorie.equals("Facture")){
+                if(categorie.equals("Facture")){
                     String numero = champs[3].trim();
                     String description = champs[5].trim();
                     int nombre = Integer.parseInt(champs[7].trim());

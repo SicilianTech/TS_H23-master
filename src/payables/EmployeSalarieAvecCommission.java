@@ -41,20 +41,20 @@ public class EmployeSalarieAvecCommission extends EmployeSalarie implements Comm
 
     @Override
     public String toString() {
-        return String.format("%s: %s%n%s: %,.2f",
-                getCategorieString(), super.toString(), "salaire hebdomadaire", getSalaireHebdomadaire());
+        return super.toString();
     }
 
     public String toStringAffichage() {
         String info = super.toStringAffichage();
-        info += " Salaire [" + this.getSalaireHebdomadaire()  + "]";
+        info += " Commission [" + this.getTauxCommission() + "] Ventes [" + this.getVentesBrutes() + "]";
         return info;
     }
 
     public String toStringSauvegarde() {
-        String info = String.format("ID [%3d] Nom complet [%20s] NAS [%9s] Salaire [%6.2f] Mémo [%15s] Catégorie [%20s]",
+        String info = String.format("ID [%3d] Nom complet [%20s] NAS [%9s] Taux commission [%4.2f] Ventes [%10.2f] Mémo [%20s] Catégorie [%20s]",
                 this.getID(), this.getNomComplet(), this.getNumeroAssuranceSociale(),
-                this.getSalaireHebdomadaire(), getMontantCommission(venteBrutes),this.getMemo(), this.getCategorieString());
+                this.getTauxCommission(), this.getVentesBrutes(),
+                this.getMemo(), this.getCategorieString());
         return info;
     }
 }

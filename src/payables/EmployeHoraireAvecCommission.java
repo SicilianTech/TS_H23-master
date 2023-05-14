@@ -32,8 +32,12 @@ public class EmployeHoraireAvecCommission extends EmployeHoraire implements Comm
     public double getVentesBrutes() {
         return ventesBrutes;
     }
-    public double getMontantCommission(double venteTotale) {
-        return venteTotale * tauxCommission;
+    public double getMontantCommission(double ventesBrutes) {
+        return ventesBrutes * tauxCommission;
+    }
+    public double getMontantPaiement(){
+        double salaireBase = this.getHeuresTravaillees() * this.getTauxHoraire();
+        return salaireBase + this.getMontantCommission(ventesBrutes);
     }
     @Override
     public String toString() {
@@ -50,9 +54,8 @@ public class EmployeHoraireAvecCommission extends EmployeHoraire implements Comm
     }
 
     public String toStringSauvegarde() {
-        String info = String.format("ID [%3d] Nom complet [%20s] NAS [%9s] Taux Horaire [%4.2f] Heures travaillées [%4.2f] Taux commission [%4.2f] Ventes [%10.2f] Mémo [%15s] Catégorie [%20s]",
+        String info = String.format("ID [%3d] Nom complet [%20s] NAS [%9s] Salaire [%6.2f] Taux commission [%4.2f] Ventes [%10.2f] Mémo [%20s] Catégorie [%20s]",
                 this.getID(), this.getNomComplet(), this.getNumeroAssuranceSociale(),
-                this.getTauxHoraire(), this.getHeuresTravaillees(),
                 this.getTauxCommission(), this.getVentesBrutes(),
                 this.getMemo(), this.getCategorieString());
         return info;

@@ -158,5 +158,15 @@ public class GUIPayableDialogue extends JDialog {
         add(buttons, BorderLayout.SOUTH);
         pack();
     }
+    private void ajouterChamp(String nom, String contenu) {
+        ajouterChamp(nom, contenu, true);
+    }
+
+    private void ajouterChamp(String nom, String contenu, boolean editable) {
+        JTextField champ = new JTextField(contenu);
+        champ.setEditable(editable);
+        frame.add(new JLabel(nom));
+        frame.add(champ);
+    }
 
 }

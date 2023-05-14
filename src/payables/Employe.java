@@ -25,7 +25,7 @@ public abstract class Employe extends Payable {
 
 	public String toStringAffichage() {
 		String info = super.toStringAffichage();
-		info += String.format(" Nom complet [%20s] NAS [%9s]",
+		info += String.format(" Nom complet [%17s] NAS [%9s]",
 				this.getNomComplet(), this.getNumeroAssuranceSociale());
 		return info;
 	}

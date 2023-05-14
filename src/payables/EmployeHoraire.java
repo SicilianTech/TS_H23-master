@@ -50,18 +50,18 @@ public class EmployeHoraire extends Employe {
 	public String toString() {
 		return String.format("%s: %s%n%s: %,.2f %s: %,.2f",
 				getCategorieString(), super.toString(),
-				"salaire horaire", this.tauxHoraire,
-				"heures travaillées", this.heuresTravaillees);
+				"Salaire horaire", this.tauxHoraire,
+				"Heures travaillées", this.heuresTravaillees);
 	}
 
 	public String toStringAffichage() {
 		String info = super.toStringAffichage();
-		info += " Salaire [" + this.getMontantPaiement()  + "] + heures travaillées ["+ String.format("%,.2f", this.getHeuresTravaillees()) + "]";
+		info += " Salaire [" + this.getMontantPaiement()  + "] Heures travaillées ["+ String.format("%,.2f", this.getHeuresTravaillees()) + "] Taux horaire [" + String.format("%,.2f", this.getTauxHoraire()) + "]";
 		return info;
 	}
 
 	public String toStringSauvegarde() {
-		String info = String.format("ID [%3d] Nom complet [%20s] NAS [%9s] Taux Horaire [%4.2f] Heures travaillées [%4.2f] Mémo [%15s] Catégorie [%20s]",
+		String info = String.format("ID [%3d] Nom complet [%20s] NAS [%9s] Taux Horaire [%4.2f] Heures travaillées [%4.2f] Mémo [%20s] Catégorie [%20s]",
 				this.getID(), this.getNomComplet(), this.getNumeroAssuranceSociale(),
 				this.getTauxHoraire(), this.getHeuresTravaillees(), this.getMemo(), this.getCategorieString());
 		return info;
